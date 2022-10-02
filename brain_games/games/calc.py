@@ -1,5 +1,5 @@
 from random import choice, randint
-from enum import Enum
+from operator import add, sub, mul
 
 
 DESCRIPTION = "What is the result of the expression?"
@@ -10,29 +10,26 @@ MAX_NUMBER_VALUE = 30
 QUESTION = "{0} {1} {2}"
 
 
-class Operation(Enum):
-    ADD = "+"
-    SUB = "-"
-    MULT = "*"
+OPERATIONS = {
+    "+": add,
+    "-": sub,
+    "*": mul
+}
 
 
 def apply_operation(first_number, second_number, operation):
     """Apply operation to first_number and second_number. Return result."""
-    if operation == Operation.ADD:
-        return first_number + second_number
-    elif operation == Operation.SUB:
-        return first_number - second_number
-    elif operation == Operation.MULT:
-        return first_number * second_number
-    else:
+    operation_func = OPERATIONS.get(operation)
+    if not operation_func:
         raise ValueError("Unsupported operation type")
+    return operation_func(first_number, second_number)
 
 
 def get_round_question_and_answer():
-    operation = choice(list(Operation))
+    operation = choice(list(OPERATIONS.keys()))
     first_number = randint(MIN_NUMBER_VALUE, MAX_NUMBER_VALUE)
     second_number = randint(MIN_NUMBER_VALUE, MAX_NUMBER_VALUE)
-    question = QUESTION.format(first_number, operation.value, second_number)
+    question = QUESTION.format(first_number, operation, second_number)
     result = apply_operation(first_number, second_number, operation)
     answer = str(result)
     return question, answer
