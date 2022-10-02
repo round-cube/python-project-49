@@ -26,7 +26,9 @@ def welcome_user():
 def get_answer(question):
     """Print question, read user input and return answer."""
     print(QUESTION_MESSAGE.format(question))
-    return prompt.string(ANSWER_MESSAGE)
+    answer = prompt.string(ANSWER_MESSAGE)
+    lower_answer = answer.lower()
+    return lower_answer
 
 
 def say_goodbye(name, is_successful):
