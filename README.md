@@ -8,9 +8,24 @@ Status](https://github.com/round-cube/python-project-49/workflows/hexlet-check/b
 - `cpython` 3.10
 - `poetry`
 
-## Installation
+## Build
 
-`make build publish package-install`
+```sh
+make build
+````
+
+## Installation
+### `pip`
+
+```sh
+pip install hexlet-code
+```
+
+### `poetry`
+
+```sh
+poetry install hexlet-code
+```
 
 ## Scripts
 
